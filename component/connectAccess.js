@@ -8,7 +8,7 @@ const connectionString = process.env.conn;
 
 const access = async(path) => {
     console.log("access")
-    const query = fs.readFileSync(process.cwd() + "\\sql\\" + path,'utf-8');
+    const query = fs.readFileSync(proess.cwd() + "\\sql\\" + path,'utf-8');
     console.log("query : \n" + query);
     console.log("connectionString : " + connectionString)
 
