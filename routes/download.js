@@ -1,5 +1,6 @@
 import express from 'express'
 import access from '../component/connectAccess.js';
+import writeExcel from '../component/writeExcel.js';
 
 const router = express.Router();
 
@@ -7,12 +8,13 @@ const router = express.Router();
 //     res.send("download/");
 // })
 
-router.get('/', (req, res) => {
+router.get('/', async(req, res) => {
     //
-    res.send("H")
+    res.send("start")
     const fName = req.query.filename;
-    access(fName);
-    console.log("download/" + fName);
+    const dt = await access(fName);
+    
+    writeExcel(dt);
 })
 
 export default router;
