@@ -1,6 +1,6 @@
 import ExcelJS from 'exceljs';
 
-const writeExcel = (dt) => {
+const writeExcel = async(dt) => {
     
     console.log("excel...");
     console.log(dt)
@@ -11,20 +11,17 @@ const writeExcel = (dt) => {
     console.log(headers)
     const row = sheet.addRow(headers);
 
-    dt.forEach(data => {
+    await dt.forEach(data => {
         const values = headers.map(header => data[header]);
         sheet.addRow(values);
     });
 
-    row.eachCell((cell, number) => {
-        sheet.column(number).setWidth(cell.value.toString())
-    })
-
-    sheet.fitToWidth
+    await workbook.xlsx.writeFile('output.xlsx');
 
     workbook.xlsx.writeFile('output.xlsx')
     .then(() => {
         console.log("Excelファイルが作成されました")
+        return;
     }).catch(error => {
         console.error("Excelファイルの作成中にエラーが発生しました", error);
     });
