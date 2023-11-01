@@ -1,9 +1,9 @@
 import ExcelJS from 'exceljs';
 
-const writeExcel = async(dt) => {
+const writeExcel = async(dt,res) => {
     
     console.log("excel...");
-    console.log(dt)
+    //console.log(dt)
     const workbook = new ExcelJS.Workbook();
     const sheet = workbook.addWorksheet();
 
@@ -16,6 +16,10 @@ const writeExcel = async(dt) => {
         sheet.addRow(values);
     });
 
+    //res.setHeader("Content-Type", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    res.setHeader("Content-Type", "application/octet-stream");
+    res.setHeader("Content-Disposition", "attachment; filename=output.xlsx");
+    await workbook.xlsx.write(res);
     await workbook.xlsx.writeFile('output.xlsx');
 
     workbook.xlsx.writeFile('output.xlsx')

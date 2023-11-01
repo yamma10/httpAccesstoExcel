@@ -18,11 +18,6 @@ const access = async(path) => {
     const tmp = await db.query(query);
     //console.log(tmp.result[0]);
     const dt = tmp.result[0]
-    // db.query(query)
-    // .then(result => {
-    //     //console.log(result.result[0]);
-    //     dt = result.result[0];
-    // })
 
     return dt;
 
