@@ -15,6 +15,16 @@ router.get('/', async(req, res) => {
     console.log("flag = " + flag);
     const dt = await access(fName);
     
+    if (dt == "not exist"){
+        res.send("ファイルが存在しません");
+        res.end();
+        return;
+    } else if(dt == "not select") {
+        res.send("select文ではありません");
+        res.end();
+        return;
+    }
+    
     await writeExcel(dt,res);
     // await res.send("filename = "+ fName + "\n");
     // await res.send("flag = " + flag);

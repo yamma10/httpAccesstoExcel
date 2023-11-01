@@ -8,7 +8,17 @@ const connectionString = process.env.conn;
 
 const access = async(path) => {
     console.log("access")
-    const query = fs.readFileSync(process.cwd() + "\\sql\\" + path,'utf-8');
+    let query;
+    try {
+        query = fs.readFileSync(process.cwd() + "\\sql\\" + path,'utf-8');
+    } catch {
+        return "not exist";
+    }
+    
+    if(query.slice(0,6) != "select") {
+        return "not select"
+    }
+    
     console.log("query : \n" + query);
     console.log("connectionString : " + connectionString)
 
